@@ -1,7 +1,7 @@
 '''
 Author: leixk_ai
 Date: 2021-05-19 14:25:58
-LastEditTime: 2021-05-19 14:32:46
+LastEditTime: 2021-06-08 15:26:01
 LastEditors: Please set LastEditors
 Description: 将labelme生成的json文件转换成csv格式(x1, y1, x2, y2, x3, y3, x4, y4, label)的数据
 FilePath: /img_utils/utils/labelme2csv.py
@@ -16,9 +16,9 @@ from argparse import ArgumentParser
 def main():
     # 接收传参
     parser = ArgumentParser()
-    parser.add_argument('--in_dir', type=str, default='E:/fsdownload/fsdownload/bl_field_ann/val_org', help="labelme标注数据所在路径，图像和对应的json文件在同一路径，文件名前缀相同")
-    parser.add_argument('--out_dir', type=str, default='E:/fsdownload/fsdownload/bl_field_ann/val', help="数据输出目录")
-    parser.add_argument("--copy", type=int, default=1, help="是否复制图片到输出目录")  # 1代表复制
+    parser.add_argument('--in_dir', type=str, default='E:/fsdownload/fsdownload/bl_field_ann/high', help="labelme标注数据所在路径，图像和对应的json文件在同一路径，文件名前缀相同")
+    parser.add_argument('--out_dir', type=str, default='E:/fsdownload/fsdownload/bl_field_ann/high', help="数据输出目录")
+    parser.add_argument("--copy", type=int, default=0, help="是否复制图片到输出目录")  # 1代表复制
     args = parser.parse_args()
 
     # 创建文件输出路径
@@ -61,6 +61,11 @@ def main():
                     else:
                         points = [(x1, y1), (x1, y2), (x2, y2), (x2, y1)]
                 elif len(points) == 4:
+                    # xmin = min(points[0][0],points[1][0],points[2][0],points[3][0])
+                    # xmax = max(points[0][0],points[1][0],points[2][0],points[3][0])
+                    # # ymin = min(points[0][1],points[1][1],points[2][1],points[3][1])
+                    # # ymax = max(points[0][1],points[1][1],points[2][1],points[3][1])
+                    # points = [(xmin, points[0][1]), (xmax, points[1][1]), (xmax, points[2][1]), (xmin, points[3][1])]
                     pass
                 else:
                     print('=> {}points数量异常.'.format(name))
